@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload and Compress Image</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+        }
+
+        .aligned-image {
+            display: block;
+            margin: 0 auto;
+            max-width: 500px;
+            height: auto;
+        }
+
+        .upload-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        .upload-form label {
+            margin-bottom: 10px;
+        }
+
+        .upload-form select,
+        .upload-form input[type="submit"] {
+            background-color: rgb(128, 212, 159);
+            color: #000;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .upload-form input[type="submit"] {
+            width: 150px;
+            text-align: center;
+        }
+
+        .compressed-image {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .compressed-image img {
+            max-width: 500px;
+            height: auto;
+        }
+
+        .download-button {
+            margin-top: 10px;
+        }
+
+        .download-button a {
+            display: inline-block;
+            background-color: rgb(128, 212, 159);
+            color: #000;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <center><h1 style="color: rgb(128, 212, 159);">Image Compressor</h1></center>
+    <form class="upload-form" method="POST" action="/compress" enctype="multipart/form-data">
+        <label for="image">Select an image:</label>
+        <div><input type="file" name="image" id="image"></div>
+        <br><br><br>
+        <label for="compression_level">Compression Level:</label>
+        <select name="compression_level" id="compression_level">
+            <option value="low">Low Quality</option>
+            <option value="medium" selected>Medium Quality</option>
+            <option value="high">High Quality</option>
+        </select>
+        <input type="submit" value="Compress">
+    </form>
+    {% if compressed_image %}
+    <div class="compressed-image">
+        <h2>Compressed Image</h2>
+        <img src="{{ compressed_image }}" alt="Compressed Image">
+        <div class="download-button">
+            <a href="{{ compressed_image }}" download>Download Compressed Image</a>
+        </div>
+    </div>
+    {% endif %}
+</body>
+</html>
